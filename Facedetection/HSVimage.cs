@@ -7,31 +7,29 @@ using System.Threading.Tasks;
 
 namespace StressdetectionViaFace.Facedetection
 {
-    
+
 
     class HSVimage
     {
         // these are the things that make up an HSV image
         // arrays are in x,y format
-        public double[,] hue;
-        public double[,] saturation;
-        public double[,] lightness;// used for convenience
+        public HSVPixel[,] Pixels;
         public int width;
         public int height; 
 
         public double GetHueAtxy(int x, int y)
         {
-            double copy1 = hue[x, y];
+            double copy1 = Pixels[x, y].GetH();
             return copy1;
         }
         public double GetSaturationAtxy(int x, int y)
         {
-            double copy1 = saturation[x, y];
+            double copy1 = Pixels[x, y].GetS();
             return copy1;
         }
         public double GetLightnessAtxy(int x, int y)
         {
-            double copy1 = lightness[x, y];
+            double copy1 = Pixels[x, y].GetL();
             return copy1;
         }
 
@@ -41,30 +39,29 @@ namespace StressdetectionViaFace.Facedetection
             width = bmp.Width;
             height = bmp.Height;
 
-            //  set up the arrays 
-            hue = new double[width, height];
-            lightness  = new double[width, height];
-            saturation  = new double[width, height];
+            //  set up the array
+            Pixels = new HSVPixel[width, height];
+           
             int x,y ;
             // loop verticaly 
-            for(y= 0; y<= height; y++)
+            for(y= 0; y< height; y++)
             {
                 // loop horizontaly 
-                for (x = 0; x <= width; x++)
+                for (x = 0; x < width; x++)
                 {
+                    Color cl1,cl2 = new Color();
+                    cl2 = bmp.GetPixel(x, y);
+                    cl1 = Color.FromArgb(cl2.R,cl2.G,cl2.B);
                     //  fil hue array
-                    hue[x, y] = (Color.FromArgb(bmp.GetPixel(x, y).R, bmp.GetPixel(x, y).G, bmp.GetPixel(x, y).B)).GetHue();
-
-                    // fill lightness array 
-                    lightness [x,y] = (Color.FromArgb(bmp.GetPixel(x, y).R, bmp.GetPixel(x, y).G, bmp.GetPixel(x, y).B)).GetBrightness();
-                    // fill saturation array
-                    saturation [x,y] = (Color.FromArgb(bmp.GetPixel(x, y).R, bmp.GetPixel(x, y).G, bmp.GetPixel(x, y).B)).GetBrightness();
-
-
+                    Pixels[x, y] = RGBToHSVPixel(cl1);
                 }
             }
-           
-
+        }
+        // for use if I need it again
+        public HSVPixel RGBToHSVPixel(Color thiscolor)
+        {
+            HSVPixel pixel = new HSVPixel(thiscolor.GetHue(), thiscolor.GetSaturation(), thiscolor.GetBrightness());
+            return pixel;
         }
 
     }

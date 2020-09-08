@@ -53,6 +53,14 @@ namespace StressdetectionViaFace.Facedetection
         }
 
         // getters
+        public int GetWidth()
+        {
+            return width;
+        }
+        public int GetHeight()
+        {
+            return height;
+        }
         public double CbAtxy(int x , int y )
         {
             double cb;

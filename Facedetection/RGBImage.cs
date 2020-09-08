@@ -47,6 +47,19 @@ namespace StressdetectionViaFace.Facedetection
         }
 
         // getters
+        public int GetWidth()
+        {
+            return width;
+        }
+        public  int GetHeight()
+        {
+            return height;
+        }
+        public RGBPixel GetRGBPixel(int x, int y)
+        {
+            return myArray[x, y];
+        }
+
         public double RAtxy(int x, int y)
         {
             double R;

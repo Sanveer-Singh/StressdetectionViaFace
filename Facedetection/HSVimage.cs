@@ -63,6 +63,14 @@ namespace StressdetectionViaFace.Facedetection
             HSVPixel pixel = new HSVPixel(thiscolor.GetHue(), thiscolor.GetSaturation(), thiscolor.GetBrightness());
             return pixel;
         }
+        public int GetWidth()
+        {
+            return width;
+        }
+        public int GetHeight()
+        {
+            return height;
+        }
 
     }
 }

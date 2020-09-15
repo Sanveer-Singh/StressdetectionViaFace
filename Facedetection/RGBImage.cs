@@ -125,6 +125,34 @@ namespace StressdetectionViaFace.Facedetection
 
             return (Bitmap)bmp;
         }
+        // so we can visually show the detected areas 
+        public Bitmap GetDetectedBmp()
+        {
+            Bitmap bmp = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(bmp)) g.Clear(Color.White);
+            for (int y = 0; y < bmp.Height; y++)
+                for (int x = 0; x < bmp.Width; x++)
+                {
+                    Color nc = new Color();
+                    Color ndC = new Color();
+ 
+                    if(myArray[x,y].GetDetected()== true)
+                    {
+                        // color of detected areas 
+                        nc = Color.FromArgb(Convert.ToInt32(myArray[x, y].GetR()), Convert.ToInt32(myArray[x, y].GetG()), Convert.ToInt32(myArray[x, y].GetB()));
+
+                    }
+                    else
+                    {
+                        // color of non detected areas 
+                        ndC = Color.FromArgb(0, 0, 0);
+                    }
+
+                    bmp.SetPixel(x, y, nc);
+                }
+
+            return (Bitmap)bmp;
+        }
 
     }
 }

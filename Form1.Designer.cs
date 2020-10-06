@@ -35,6 +35,7 @@
             this.btnGetFace = new System.Windows.Forms.Button();
             this.btnGreyScalar = new System.Windows.Forms.Button();
             this.btnGetFaceViaLibrary = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,7 +83,7 @@
             this.btnGetFace.Name = "btnGetFace";
             this.btnGetFace.Size = new System.Drawing.Size(305, 112);
             this.btnGetFace.TabIndex = 4;
-            this.btnGetFace.Text = "Display face only";
+            this.btnGetFace.Text = "Display face only*";
             this.btnGetFace.UseVisualStyleBackColor = true;
             this.btnGetFace.Click += new System.EventHandler(this.btnGetFace_Click);
             // 
@@ -106,11 +107,22 @@
             this.btnGetFaceViaLibrary.UseVisualStyleBackColor = true;
             this.btnGetFaceViaLibrary.Click += new System.EventHandler(this.btnGetFaceViaLibrary_Click);
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(82, 1047);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(305, 106);
+            this.btnFilter.TabIndex = 7;
+            this.btnFilter.Text = "Soften The Image";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2918, 1327);
+            this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.btnGetFaceViaLibrary);
             this.Controls.Add(this.btnGreyScalar);
             this.Controls.Add(this.btnGetFace);
@@ -135,6 +147,7 @@
         private System.Windows.Forms.Button btnGetFace;
         private System.Windows.Forms.Button btnGreyScalar;
         private System.Windows.Forms.Button btnGetFaceViaLibrary;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
 

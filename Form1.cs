@@ -116,19 +116,41 @@ namespace StressdetectionViaFace
             picBox.Image = new Bitmap(img, sz);
         }
 
-        private void btnGetFaceViaLibrary_Click(object sender, EventArgs e)
+       /// <summary>
+       /// Set up so original will now be localized and greyscaled
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>       
+       private void btnGetFaceViaLibrary_Click(object sender, EventArgs e)
         {
          
             Bitmap bmp = LibraryBased .faceOnly(original);
+            Bitmap GreyScaled1;
             if(!(bmp is null ))
             {
                 // got the face  now save 
-                FaceOnly = bmp;
-                Size sz = new Size(bmp.Width, bmp.Height);
-                Image img = new Bitmap(bmp);
+                // greyscale 
+                GreyScaled1 = GreyScalar.GreyscaleThis(bmp);
+                original  = GreyScaled1 ;
+                Size sz = new Size(GreyScaled1.Width, GreyScaled1.Height);
+                Image img = new Bitmap(GreyScaled1);
                 picBox.Image = new Bitmap(img, sz);
             }
             
+        }
+
+        /// use the grey scaled and localized original
+        /// 
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            // send original
+            MeanFilter mf = new MeanFilter(original);
+            // save  this 
+            original = mf.MeanFilterThis();
+            Size sz = new Size(original .Width, original .Height);
+            Image img = new Bitmap(original );
+            picBox.Image = new Bitmap(img, sz);
+
         }
     }
 }

@@ -34,6 +34,7 @@
             this.FillPatches = new System.Windows.Forms.Button();
             this.btnGetFace = new System.Windows.Forms.Button();
             this.btnGreyScalar = new System.Windows.Forms.Button();
+            this.btnGetFaceViaLibrary = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             // 
             // btnGetFace
             // 
-            this.btnGetFace.Location = new System.Drawing.Point(82, 1170);
+            this.btnGetFace.Location = new System.Drawing.Point(82, 852);
             this.btnGetFace.Name = "btnGetFace";
             this.btnGetFace.Size = new System.Drawing.Size(305, 112);
             this.btnGetFace.TabIndex = 4;
@@ -95,11 +96,22 @@
             this.btnGreyScalar.UseVisualStyleBackColor = true;
             this.btnGreyScalar.Click += new System.EventHandler(this.btnGreyScalar_Click);
             // 
+            // btnGetFaceViaLibrary
+            // 
+            this.btnGetFaceViaLibrary.Location = new System.Drawing.Point(2456, 168);
+            this.btnGetFaceViaLibrary.Name = "btnGetFaceViaLibrary";
+            this.btnGetFaceViaLibrary.Size = new System.Drawing.Size(303, 117);
+            this.btnGetFaceViaLibrary.TabIndex = 6;
+            this.btnGetFaceViaLibrary.Text = "Get Face With library";
+            this.btnGetFaceViaLibrary.UseVisualStyleBackColor = true;
+            this.btnGetFaceViaLibrary.Click += new System.EventHandler(this.btnGetFaceViaLibrary_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2456, 1327);
+            this.ClientSize = new System.Drawing.Size(2918, 1327);
+            this.Controls.Add(this.btnGetFaceViaLibrary);
             this.Controls.Add(this.btnGreyScalar);
             this.Controls.Add(this.btnGetFace);
             this.Controls.Add(this.FillPatches);
@@ -122,6 +134,7 @@
         private System.Windows.Forms.Button FillPatches;
         private System.Windows.Forms.Button btnGetFace;
         private System.Windows.Forms.Button btnGreyScalar;
+        private System.Windows.Forms.Button btnGetFaceViaLibrary;
     }
 }
 

@@ -24,6 +24,8 @@ namespace StressdetectionViaFace
         public Bitmap FloodedSkin;
         // save the grey scaled version 
         public Bitmap GreyscaledSkin;
+        // save the face only
+        public Bitmap FaceOnly;
         public Form1()
         {
             InitializeComponent();
@@ -112,6 +114,21 @@ namespace StressdetectionViaFace
             Size sz = new Size(greyScaled.Width , greyScaled.Height );
             Image img = new Bitmap(greyScaled);
             picBox.Image = new Bitmap(img, sz);
+        }
+
+        private void btnGetFaceViaLibrary_Click(object sender, EventArgs e)
+        {
+         
+            Bitmap bmp = LibraryBased .faceOnly(original);
+            if(!(bmp is null ))
+            {
+                // got the face  now save 
+                FaceOnly = bmp;
+                Size sz = new Size(bmp.Width, bmp.Height);
+                Image img = new Bitmap(bmp);
+                picBox.Image = new Bitmap(img, sz);
+            }
+            
         }
     }
 }

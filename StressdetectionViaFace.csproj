@@ -88,6 +88,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LBPvariants\AMLBP.cs" />
     <Compile Include="Preprocessing\ColorMeanFilter.cs" />
     <Compile Include="Preprocessing\GreyScalar.cs" />
     <Compile Include="Preprocessing\MeanFilter.cs" />

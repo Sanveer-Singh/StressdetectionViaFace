@@ -36,6 +36,7 @@
             this.btnGreyScalar = new System.Windows.Forms.Button();
             this.btnGetFaceViaLibrary = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.btnAMLBP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,11 +118,22 @@
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
+            // btnAMLBP
+            // 
+            this.btnAMLBP.Location = new System.Drawing.Point(82, 1212);
+            this.btnAMLBP.Name = "btnAMLBP";
+            this.btnAMLBP.Size = new System.Drawing.Size(305, 94);
+            this.btnAMLBP.TabIndex = 8;
+            this.btnAMLBP.Text = "Get AMLBP picture";
+            this.btnAMLBP.UseVisualStyleBackColor = true;
+            this.btnAMLBP.Click += new System.EventHandler(this.btnAMLBP_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2918, 1327);
+            this.ClientSize = new System.Drawing.Size(2918, 1443);
+            this.Controls.Add(this.btnAMLBP);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.btnGetFaceViaLibrary);
             this.Controls.Add(this.btnGreyScalar);
@@ -148,6 +160,7 @@
         private System.Windows.Forms.Button btnGreyScalar;
         private System.Windows.Forms.Button btnGetFaceViaLibrary;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnAMLBP;
     }
 }
 

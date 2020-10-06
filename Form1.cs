@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using StressdetectionViaFace.Facedetection;
 using StressdetectionViaFace.Preprocessing;
+using StressdetectionViaFace.LBPvariants;
 
 namespace StressdetectionViaFace
 {
@@ -64,7 +65,7 @@ namespace StressdetectionViaFace
             ColorMeanFilter cmf = new ColorMeanFilter(original);
             original = cmf.MeanFilterThis();
             // repeat for greater effect
-            original = cmf.MeanFilterThis();
+           original = cmf.MeanFilterThis();
             detector  = new FaceDetector(original );
             Bitmap detected = detector.GetDetectedBmp();
             // save 
@@ -151,10 +152,28 @@ namespace StressdetectionViaFace
             MeanFilter mf = new MeanFilter(original);
             // save  this 
             original = mf.MeanFilterThis();
-            Size sz = new Size(original .Width, original .Height);
+            // resize 
+            Size sz = new Size(70, 70);
             Image img = new Bitmap(original );
             picBox.Image = new Bitmap(img, sz);
+            original = (Bitmap )picBox.Image;
 
+        }
+
+        private void btnAMLBP_Click(object sender, EventArgs e)
+        {
+          
+            AMLBP lbp = new AMLBP(original, 3);
+            List<int> histogram = lbp.AMLBPPic();
+            string temp = "";
+            foreach (int i in histogram )
+            {
+                temp += i.ToString()+" ;";
+            }
+            MessageBox.Show(temp, "histogram");
+            Size sz = new Size(original.Width, original.Height);
+            Image img = new Bitmap(original);
+            picBox.Image = new Bitmap(img, sz);
         }
     }
 }

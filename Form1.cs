@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using StressdetectionViaFace.Facedetection;
 using StressdetectionViaFace.Preprocessing;
 using StressdetectionViaFace.LBPvariants;
+using StressdetectionViaFace.utilities;
 
 namespace StressdetectionViaFace
 {
@@ -164,9 +165,9 @@ namespace StressdetectionViaFace
         {
           
             AMLBP lbp = new AMLBP(original, 3);
-            List<int> histogram = lbp.AMLBPPic();
+            List<SanDictionaryItem > histogram = lbp.GetHistogram ();
             string temp = "";
-            foreach (int i in histogram )
+            foreach (SanDictionaryItem  i in histogram )
             {
                 temp += i.ToString()+" ;";
             }

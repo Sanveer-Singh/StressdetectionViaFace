@@ -1,8 +1,10 @@
 ﻿using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using StressdetectionViaFace.utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,11 @@ namespace StressdetectionViaFace.LBPvariants
         // we need a bitmap 
         Bitmap ThisPic;
         // we need a radius 
-        int Radius ;
+        int Radius;
         // integer latice 
         List<int> Lattice;
 
-        public AMLBP(Bitmap bmp,int Rad =3)
+        public AMLBP(Bitmap bmp, int Rad = 3)
         {
             ThisPic = bmp;
             Radius = Rad;
@@ -36,11 +38,11 @@ namespace StressdetectionViaFace.LBPvariants
         public List<int> AMLBPPic()
         {
             // make up an answer 
-            Bitmap Filtered = new Bitmap(ThisPic .Width, ThisPic .Height);
+            Bitmap Filtered = new Bitmap(ThisPic.Width, ThisPic.Height);
             // loop through one window and get the average 
             // goes through them all applies rules then the pixels that pass are marked as detected 
-            int x, y,z;
-        
+            int x, y, z;
+
             // loop through the rows 
             for (y = 0; y < ThisPic.Height; y++)
             {
@@ -56,7 +58,21 @@ namespace StressdetectionViaFace.LBPvariants
             // return the answer 
             return Lattice;
         }
+        // lets eliminate duplicates 
 
+        public List<SanDictionaryItem> GetHistogram()
+        {
+            AMLBPPic();
+
+            List<SanDictionaryItem> items = new List<SanDictionaryItem>();
+            var query = Lattice.GroupBy(x => x)
+              .Where(g => g.Count() > 1)
+              .Select(y => new  SanDictionaryItem(  y.Key ,  y.Count()) )
+              .ToList();
+
+
+            return query;
+        }
         // get AMLBP for a point 
         private int AMLBPthis(int X,int Y)
         {

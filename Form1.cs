@@ -61,6 +61,10 @@ namespace StressdetectionViaFace
 
         private void GetDetectedFace_Click(object sender, EventArgs e)
         {
+            ColorMeanFilter cmf = new ColorMeanFilter(original);
+            original = cmf.MeanFilterThis();
+            // repeat for greater effect
+            original = cmf.MeanFilterThis();
             detector  = new FaceDetector(original );
             Bitmap detected = detector.GetDetectedBmp();
             // save 

@@ -196,19 +196,19 @@ namespace StressdetectionViaFace.Facedetection
                             }
                            
                         }
-                        else 
-                        {
-                            // skin detected 
-                            skinNeighbors = getSkinneighbors(x, y);
-                            // if its surrounded by skin
-                            if ((skinNeighbors < (6.6 - tolerance)))
-                            {
-                                // make it a skin pixel
-                                myRgbImg.SetDetected(x, y, false);
-                                changed = true;
-                            }
+                        //else 
+                        //{
+                        //    // skin detected 
+                        //    skinNeighbors = getSkinneighbors(x, y);
+                        //    // if its surrounded by skin
+                        //    if ((skinNeighbors < (6.6 - tolerance)))
+                        //    {
+                        //        // make it a skin pixel
+                        //        myRgbImg.SetDetected(x, y, false);
+                        //        changed = true;
+                        //    }
 
-                        }
+                        //}
                     }
 
                 }

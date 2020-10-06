@@ -29,5 +29,16 @@ namespace StressdetectionViaFace.Facedetection
             classifier.floodIt();
             return classifier.DetectedBmp();
         }
+        // get face only
+        public Bitmap GetfaceOnly()
+        {
+            return classifier.GetFaceOnly();
+        }
+        // grey scale control 
+        public Bitmap GetGreyscaled()
+        {
+            return classifier.GetGreyScaled();
+           
+        }
     }
 }

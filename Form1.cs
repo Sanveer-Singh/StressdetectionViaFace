@@ -22,6 +22,8 @@ namespace StressdetectionViaFace
         public Bitmap SkinOnly;
         // save the flooded image 
         public Bitmap FloodedSkin;
+        // save the grey scaled version 
+        public Bitmap GreyscaledSkin;
         public Form1()
         {
             InitializeComponent();
@@ -35,9 +37,11 @@ namespace StressdetectionViaFace
         private void btnChooseImage_Click(object sender, EventArgs e)
         {
             // open file dialog   
-            OpenFileDialog open = new OpenFileDialog();
-            // image filters  
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            OpenFileDialog open = new OpenFileDialog
+            {
+                // image filters  
+                Filter = "Image Files(*.jpg; *.png; *.jpeg; *.gif; *.bmp)|*.jpg; *.png; *.jpeg; *.gif; *.bmp"
+            };
             if (open.ShowDialog() == DialogResult.OK)
             {
                 // set size
@@ -74,19 +78,38 @@ namespace StressdetectionViaFace
             Size sz = new Size(500, 500);
             Image img = new Bitmap(flooded);
             picBox.Image = new Bitmap(img, sz);
+            msgBox();
+       
+        }
+
+        // message box function 
+        public void msgBox()
+        {
+            string message = "Finally done";
+            string caption = "its done";
+           
+             MessageBox.Show(message, caption);
         }
 
         private void btnGetFace_Click(object sender, EventArgs e)
         {
-
+            detector.GetfaceOnly();
+            Bitmap flooded = detector.GetfaceOnly(); 
+            // save 
+            FloodedSkin = flooded;
+            // set size
+            Size sz = new Size(flooded.Width , flooded.Height );
+            Image img = new Bitmap(flooded);
+            picBox.Image = new Bitmap(img, sz);
         }
 
         private void btnGreyScalar_Click(object sender, EventArgs e)
         {
-            Bitmap greyScaled = GreyScalar.GreyscaleThis(FloodedSkin);
-            
+            Bitmap greyScaled = detector.GetGreyscaled();
+            // save 
+            GreyscaledSkin = greyScaled;
             // set size
-            Size sz = new Size(500, 500);
+            Size sz = new Size(greyScaled.Width , greyScaled.Height );
             Image img = new Bitmap(greyScaled);
             picBox.Image = new Bitmap(img, sz);
         }

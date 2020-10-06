@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StressdetectionViaFace.Preprocessing;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -14,6 +15,7 @@ namespace StressdetectionViaFace.Facedetection
         private RGBImage myRgbImg;
         private YCBCRImage myYCbCrImg;
         private HSVimage myHVSImg;
+        private RGBImage Greyscaled;
         // we need a constructor 
         public FaceClassifier(Bitmap BMP)
         {
@@ -87,14 +89,14 @@ namespace StressdetectionViaFace.Facedetection
             {
                 answer = false;
             }
-            // lets try via cbcbr
+           // lets try via cbcbr
             //double cb = myYCbCrImg.CbAtxy(x, y);
             //double cr = myYCbCrImg.CrAtxy(x, y);
-            //if((cr<=(1.5862*cb+20))&&(cr >= (0.3448 * cb + 76.2069)) 
-            //    &&(cr >= (-4.5652 * cb + 234.5652))
-            //    &&(cr <= (-1.15 * cb + 301.75)) &&(cr <= (-2.2857 * cb + 43285)))
+            //if ((cr <= (1.5862 * cb + 20)) && (cr >= (0.3448 * cb + 76.2069))
+            //    && (cr >= (-4.5652 * cb + 234.5652))
+            //    && (cr <= (-1.15 * cb + 301.75)) && (cr <= (-2.2857 * cb + 43285)))
             //{
-            //  // shouldnt set a false flag to true by mistake 
+            //    // shouldnt set a false flag to true by mistake 
             //}
             //else
             //{
@@ -160,7 +162,7 @@ namespace StressdetectionViaFace.Facedetection
         }
 
         // a function that floods any missed bits
-        public void floodIt( double tolerance= 2)
+        public void floodIt( double tolerance=2)
         {
             // use a loop to properly do this 
             bool changed = true;
@@ -186,12 +188,26 @@ namespace StressdetectionViaFace.Facedetection
                             // not detected as skin 
                             skinNeighbors = getSkinneighbors(x, y);
                             // if its surrounded by skin
-                            if ((skinNeighbors > (6 - tolerance)))
+                            if ((skinNeighbors > (5.9 - tolerance)))
                             {
                                 // make it a skin pixel
                                 myRgbImg.SetDetected(x, y, true);
                                 changed = true;
                             }
+                           
+                        }
+                        else 
+                        {
+                            // skin detected 
+                            skinNeighbors = getSkinneighbors(x, y);
+                            // if its surrounded by skin
+                            if ((skinNeighbors < (6.6 - tolerance)))
+                            {
+                                // make it a skin pixel
+                                myRgbImg.SetDetected(x, y, false);
+                                changed = true;
+                            }
+
                         }
                     }
 
@@ -200,6 +216,33 @@ namespace StressdetectionViaFace.Facedetection
             
 
         }
+        // get splot
+        // use to find splots 
+        public void CleanSplot(int X, int Y)
+        {
+            int count = 0;
+            int Xtolerance =(int) Math.Truncate((myRgbImg.GetWidth()*0.05));
+            int ytolerance = (int)Math.Truncate((myRgbImg.GetHeight ()*0.05));
+            for (int y1 = Y - ytolerance ; y1 <= Y + ytolerance ; y1++)
+            {
+                for (int x1 = X - Xtolerance ; x1 <= X + Xtolerance ; x1++)
+                {
+                    // explicit bounds checks 
+                    if ((x1 >= 0) && (y1 >= 0) && (x1 < myRgbImg.GetWidth()) && (y1 < myRgbImg.GetHeight()))
+                    {
+                        RGBPixel newC = myRgbImg.GetRGBPixel(x1, y1);
+                        if (newC.GetDetected())
+                        {
+                            // total the skinpixels around it 
+                            count += 1;
+                        }
+                    }
+
+                }
+            }
+         
+        }
+       
 
         // a function to get skin neighbors 
         //gets the number of skin pixels around a pixel
@@ -230,8 +273,166 @@ namespace StressdetectionViaFace.Facedetection
         }
 
         // a function that  builds bounding boxes
-       
+       public Bitmap GetFaceOnly()
+        {
+            int mostleft, mostright, mostup, mostdown;
+            mostleft = getMostLeftxValue();
+            mostright = getMostRighttxValue();
+            mostup = getMostUpYvalue();
+            mostdown = getMostDownYvalue();
+            int newWidth, newHeight;
+            newWidth = mostright - mostleft;
+            newHeight = mostdown - mostup;
+            Bitmap newimg = new Bitmap(newWidth, newHeight);
+            Bitmap oldimg = myRgbImg.ToBmp();
+            // copy 
+            int x, y;
+        
+            // loop through the rows 
+            for (y = mostup ; y < mostdown  ; y++)
+            {
+                // loop through the cols 
+                for (x = mostleft ; x < mostright  ; x++)
+                {
+                    Color nc = new Color();
+                    nc = oldimg.GetPixel(x, y);
+                    newimg.SetPixel(x - mostleft, y - mostup, nc);
+                }
 
+            }
+
+            return newimg;
+        }
+
+        private int getMostLeftxValue()
+        {
+            int myXval = 0;
+            int x, y;
+
+
+            // loop through the cols 
+            for (x = 0; x < myRgbImg.GetWidth(); x++)
+            {
+                // loop through the rows 
+                for (y = 0; y < myRgbImg.GetHeight(); y++)
+                {
+                    
+                    RGBPixel P = myRgbImg.GetRGBPixel(x, y);
+                    if (P.GetDetected())
+                    {
+                        myXval = x;
+                        return myXval;
+                    }
+
+                }
+            }
+            return myXval;
+        }
+        private int getMostRighttxValue()
+        {
+            int myXval = 0;
+            int x, y;
+
+
+            // loop through the cols 
+            for (x = myRgbImg.GetWidth()-1; x >0 ; x--)
+            {
+                // loop through the rows 
+                for (y = 0; y < myRgbImg.GetHeight(); y++)
+                {
+              
+                    RGBPixel P = myRgbImg.GetRGBPixel(x, y);
+                    if (P.GetDetected())
+                    {
+                        myXval = x;
+                        return myXval;
+                    }
+
+                }
+            }
+            return myXval;
+        }
+
+        private int getMostUpYvalue()
+        {
+            int myXval = 0;
+            int x, y;
+
+            
+                // loop through the rows 
+                for (y = 0; y < myRgbImg.GetHeight(); y++)
+                {
+                    // loop through the cols 
+                    for (x = 0; x < myRgbImg.GetWidth(); x++)
+                    {
+                        // if the pixel is skin then window around it
+                        RGBPixel P = myRgbImg.GetRGBPixel(x, y);
+                        if (P.GetDetected())
+                        {
+                            myXval = y;
+                            return myXval;
+                        }
+                    }
+
+                }
+            
+            return myXval;
+        }
+        private int getMostDownYvalue()
+        {
+            int myXval = 0;
+            int x, y;
+
+
+            // loop through the rows 
+            for (y = myRgbImg.GetHeight()-1; y >0; y--)
+            {
+                // loop through the cols 
+                for (x = 0; x < myRgbImg.GetWidth(); x++)
+                {
+                    // if the pixel is skin then window around it
+                    RGBPixel P = myRgbImg.GetRGBPixel(x, y);
+                    if (P.GetDetected())
+                    {
+                        myXval = y;
+                        return myXval;
+                    }
+                }
+
+            }
+
+            return myXval;
+        }
+
+        // a function to set the greyscaled option 
+        public Bitmap  GetGreyScaled()
+        {
+            Bitmap grey;
+           grey =  GreyScalar.GreyscaleThis(myRgbImg.ToBmp() );
+            // lets save the changes 
+            // perform pixel by pixel copy 
+            // goes through them all applies rules then the pixels that pass are marked as detected 
+            int x, y;
+            bool myTest;
+            // loop through the rows 
+            for (y = 0; y < myRgbImg.GetHeight(); y++)
+            {
+                // loop through the cols 
+                for (x = 0; x < myRgbImg.GetWidth(); x++)
+                {
+                   
+                    // we only care about the detected pixels 
+                    if (myRgbImg.DetectedAtxy (x,y))
+                    {
+                        myRgbImg.SetR(x,y,grey.GetPixel(x,y).R );
+                        myRgbImg.SetG(x, y, grey.GetPixel(x, y).G);
+                        myRgbImg.SetB(x, y, grey.GetPixel(x, y).G);
+                    }
+                }
+
+            }
+            return myRgbImg.GetDetectedBmp();
+        }
 
         // a function that chooses the face one 
 

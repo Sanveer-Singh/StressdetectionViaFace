@@ -37,6 +37,14 @@
             this.btnGetFaceViaLibrary = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnAMLBP = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnLBP = new System.Windows.Forms.Button();
+            this.btnADLBP = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +88,7 @@
             // 
             // btnGetFace
             // 
-            this.btnGetFace.Location = new System.Drawing.Point(82, 852);
+            this.btnGetFace.Location = new System.Drawing.Point(82, 810);
             this.btnGetFace.Name = "btnGetFace";
             this.btnGetFace.Size = new System.Drawing.Size(305, 112);
             this.btnGetFace.TabIndex = 4;
@@ -114,25 +122,109 @@
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(305, 106);
             this.btnFilter.TabIndex = 7;
-            this.btnFilter.Text = "Soften The Image";
+            this.btnFilter.Text = "Soften The Image via square mean filter";
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // btnAMLBP
             // 
-            this.btnAMLBP.Location = new System.Drawing.Point(82, 1212);
+            this.btnAMLBP.Location = new System.Drawing.Point(75, 1322);
             this.btnAMLBP.Name = "btnAMLBP";
             this.btnAMLBP.Size = new System.Drawing.Size(305, 94);
             this.btnAMLBP.TabIndex = 8;
-            this.btnAMLBP.Text = "Get AMLBP picture";
+            this.btnAMLBP.Text = "Get AMLBP histogram";
             this.btnAMLBP.UseVisualStyleBackColor = true;
             this.btnAMLBP.Click += new System.EventHandler(this.btnAMLBP_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1287, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(315, 117);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Train";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnLBP
+            // 
+            this.btnLBP.Location = new System.Drawing.Point(75, 1475);
+            this.btnLBP.Name = "btnLBP";
+            this.btnLBP.Size = new System.Drawing.Size(305, 77);
+            this.btnLBP.TabIndex = 10;
+            this.btnLBP.Text = "Get LBP histogram";
+            this.btnLBP.UseVisualStyleBackColor = true;
+            this.btnLBP.Click += new System.EventHandler(this.btnLBP_Click);
+            // 
+            // btnADLBP
+            // 
+            this.btnADLBP.Location = new System.Drawing.Point(75, 1586);
+            this.btnADLBP.Name = "btnADLBP";
+            this.btnADLBP.Size = new System.Drawing.Size(305, 86);
+            this.btnADLBP.TabIndex = 11;
+            this.btnADLBP.Text = "Get ADLBP histogram";
+            this.btnADLBP.UseVisualStyleBackColor = true;
+            this.btnADLBP.Click += new System.EventHandler(this.btnADLBP_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(59, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(210, 32);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Get The image:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(59, 282);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(291, 32);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Localization By Hand:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2434, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(302, 32);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Localization Via library";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(59, 995);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(321, 32);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Pre Processing Options:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(82, 1185);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(302, 86);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Soften Via Circular Filter";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2918, 1443);
+            this.ClientSize = new System.Drawing.Size(2918, 1684);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnADLBP);
+            this.Controls.Add(this.btnLBP);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAMLBP);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.btnGetFaceViaLibrary);
@@ -147,6 +239,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -161,6 +254,14 @@
         private System.Windows.Forms.Button btnGetFaceViaLibrary;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnAMLBP;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLBP;
+        private System.Windows.Forms.Button btnADLBP;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button2;
     }
 }
 

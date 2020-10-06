@@ -35,7 +35,7 @@ namespace StressdetectionViaFace
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            button1.Visible = false;
         }
 
         private void btnChooseImage_Click(object sender, EventArgs e)
@@ -175,6 +175,55 @@ namespace StressdetectionViaFace
             Size sz = new Size(original.Width, original.Height);
             Image img = new Bitmap(original);
             picBox.Image = new Bitmap(img, sz);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLBP_Click(object sender, EventArgs e)
+        {
+            LBP lbp = new LBP(original);
+            List<SanDictionaryItem> histogram = lbp.Histogram();
+            string temp = "";
+            foreach (SanDictionaryItem i in histogram)
+            {
+                temp += i.ToString() + " ;";
+            }
+            MessageBox.Show(temp, "histogram");
+            Size sz = new Size(original.Width, original.Height);
+            Image img = new Bitmap(original);
+            picBox.Image = new Bitmap(img, sz);
+
+        }
+
+        private void btnADLBP_Click(object sender, EventArgs e)
+        {
+            ADLBP lbp = new ADLBP(original, 3);
+            List<SanDictionaryItem> histogram = lbp.GetHistogram();
+            string temp = "";
+            foreach (SanDictionaryItem i in histogram)
+            {
+                temp += i.ToString() + " ;";
+            }
+            MessageBox.Show(temp, "histogram");
+            Size sz = new Size(original.Width, original.Height);
+            Image img = new Bitmap(original);
+            picBox.Image = new Bitmap(img, sz);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {// send original
+            CircularMeanFilter cmf = new CircularMeanFilter (original);
+            // save  this 
+            original = cmf.GetFiltered ();
+            // resize 
+            Size sz = new Size(70, 70);
+            Image img = new Bitmap(original);
+            picBox.Image = new Bitmap(img, sz);
+            original = (Bitmap)picBox.Image;
+
         }
     }
 }

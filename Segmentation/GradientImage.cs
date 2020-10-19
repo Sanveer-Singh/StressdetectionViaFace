@@ -13,9 +13,46 @@ namespace StressdetectionViaFace.Segmentation
         int width;
         Bitmap greyscaled;
         // get a gradient bitmap from a normal greyscaled bitmap 
+        /// <summary>
+        ///  used to get a TotalEdgeImage
+        /// </summary>
+        /// <param name="Grey"></param>
+        /// <returns></returns>
+      public Bitmap GetTotalEdgeImage(Bitmap Grey)
+        {
+            greyscaled  = Grey;
+            height = Grey .Height;
+            width = Grey.Width;
+            // do some greyscaling
+            // go through each pixel and get the average rgb
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x <width; x++)
+                {
+                  
 
-      
-        // get total edge pixel 
+
+
+                    double grad = TotalEdgePixel(x,y) ;
+                    int truncedgrad = (int)(Math.Truncate(grad));
+                    // set pixels to the average 
+                    greyscaled .SetPixel(x, y, Color.FromArgb(truncedgrad, truncedgrad, truncedgrad));
+                }
+            }
+
+            return greyscaled ;
+
+        }
+
+
+
+
+       /// <summary>
+       /// Sobel style total edge pixel
+       /// </summary>
+       /// <param name="x"></param>
+       /// <param name="y"></param>
+       /// <returns></returns>
         public double TotalEdgePixel(int x, int y)
         {
             double ygradient = yGradient(x, y);
@@ -113,7 +150,7 @@ namespace StressdetectionViaFace.Segmentation
         public bool InXBounds(int x)
         {
             bool answer = false;
-            if ((x>0)&& (x<width))
+            if ((x>=0)&& (x<width))
             {
                 answer = true;
             }
@@ -127,11 +164,17 @@ namespace StressdetectionViaFace.Segmentation
         public bool InYBounds(int y)
         {
             bool answer = false;
-            if ((y > 0) && (y < height))
+            if ((y >=0) && (y < height))
             {
                 answer = true;
             }
             return answer;
+        }
+
+        // get angle of a pixel 
+        public double GetAngleat(int x, int y)
+        {
+            return Math.Atan(yGradient(x, y) / XGradient(x, y));
         }
 
     }

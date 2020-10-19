@@ -8,9 +8,17 @@ namespace StressdetectionViaFace.Segmentation
 {
     class ImageNode
     {
-      
-        // coordinates 
 
+        // coordinates 
+        public int Xvalue;
+        public int YValue;
+
+
+        public ImageNode(int x, int y)
+        {
+            Xvalue = x;
+            YValue = y;
+        }
 
     }
 }

@@ -97,6 +97,11 @@
     <Compile Include="Preprocessing\MeanFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Segmentation\GradientImage.cs" />
+    <Compile Include="Segmentation\ImageEdge.cs" />
+    <Compile Include="Segmentation\ImageGraph.cs" />
+    <Compile Include="Segmentation\ImageNode.cs" />
+    <Compile Include="Segmentation\SegmentationImage.cs" />
     <Compile Include="utilities\point.cs" />
     <Compile Include="utilities\SanDictionaryItem.cs" />
     <EmbeddedResource Include="Form1.resx">

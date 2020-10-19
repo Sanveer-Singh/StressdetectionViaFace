@@ -80,6 +80,7 @@ namespace StressdetectionViaFace.Facedetection
             }
             // now lets do it for hue 
             // boundaries for hsv are 25 and 230
+            // less than 50 or greater than 150
             double hue = Convert.ToInt32(myHVSImg.GetHueAtxy(x, y));
             if ((hue < 25) || (hue > 230))
             {
@@ -93,7 +94,7 @@ namespace StressdetectionViaFace.Facedetection
             //double cb = myYCbCrImg.CbAtxy(x, y);
             //double cr = myYCbCrImg.CrAtxy(x, y);
             //if ((cr <= (1.5862 * cb + 20)) && (cr >= (0.3448 * cb + 76.2069))
-            //    && (cr >= (-4.5652 * cb + 234.5652))
+            //    && (cr >= (-4.5652 * cb + 234.5652)) //-cb+234.5652
             //    && (cr <= (-1.15 * cb + 301.75)) && (cr <= (-2.2857 * cb + 43285)))
             //{
             //    // shouldnt set a false flag to true by mistake 
@@ -102,6 +103,9 @@ namespace StressdetectionViaFace.Facedetection
             //{
             //    answer = false;
             //}
+
+            // rule 2 
+            // cb>= 77 and cb<=127 and cr>= 133 and cb<=173
 
 
             return answer;

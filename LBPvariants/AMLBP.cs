@@ -60,16 +60,19 @@ namespace StressdetectionViaFace.LBPvariants
                 for (x = 0; x < ThisPic.Width; x++)
                 {
                     z = AMLBPthis(x, y);
+                   while (z > 255){
+                        z = z / 256;
+                    }
+            
                     // store in the nice 2d array
                     Lattice.Add(z);
-                    z = z / Radius ;
-                    //Color c = Color.FromArgb(z, z, z);
-                    //Filtered.SetPixel(x, y, c);
+                    Color c = Color.FromArgb(z, z, z);
+                    Filtered.SetPixel(x, y, c);
                 }
 
             }
-            // return the answer 
-            //LBPImage = Filtered;
+            //return the answer
+           LBPImage = Filtered;
             return Lattice;
         }
         // lets eliminate duplicates 
@@ -78,15 +81,32 @@ namespace StressdetectionViaFace.LBPvariants
         {
             AMLBPPic();
 
+
             List<SanDictionaryItem> items = new List<SanDictionaryItem>();
-            
+            List<SanDictionaryItem> Newitems = new List<SanDictionaryItem>();
             var query = Lattice.GroupBy(x => x)
               .Where(g => g.Count() >= 1)
-              .Select(y => new  SanDictionaryItem(  y.Key ,  y.Count()) )
+              .Select(y => new SanDictionaryItem(y.Key, y.Count()))
               .ToList();
+            for (int x = 0; x < 256; x++)
+            {
+                var q2 = (from dic in query
+                          where dic.key == x
+                          select dic).FirstOrDefault();
+                if (q2 is null)
+                {
+                    // none found
+                    SanDictionaryItem newItem = new SanDictionaryItem(x, 0);
+                    Newitems.Add(newItem);
+                }
+                else
+                {
+                    SanDictionaryItem newItem = new SanDictionaryItem(x, q2.count);
+                    Newitems.Add(newItem);
+                }
+            }
 
-
-            return query;
+            return Newitems;
         }
         // get AMLBP for a point 
         private int AMLBPthis(int X,int Y)

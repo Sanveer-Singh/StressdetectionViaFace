@@ -171,11 +171,11 @@ namespace StressdetectionViaFace
             string temp = "";
             foreach (SanDictionaryItem  i in histogram )
             {
-                temp += i.ToString()+" ;";
+                temp += i.ToString();
             }
             MessageBox.Show(temp, "histogram");
             Size sz = new Size(original.Width, original.Height);
-            Image img = new Bitmap(original);
+            Image img = new Bitmap(lbp.GetPic());
             picBox.Image = new Bitmap(img, sz);
         }
 
@@ -191,7 +191,7 @@ namespace StressdetectionViaFace
             string temp = "";
             foreach (SanDictionaryItem i in histogram)
             {
-                temp += i.ToString() + " ;";
+                temp += i.ToString() ;
             }
             MessageBox.Show(temp, "histogram");
             Size sz = new Size(original.Width, original.Height);
@@ -211,7 +211,7 @@ namespace StressdetectionViaFace
             }
             MessageBox.Show(temp, "histogram");
             Size sz = new Size(original.Width, original.Height);
-            Image img = new Bitmap(original );
+            Image img = new Bitmap(lbp.GetPic ());
             picBox.Image = new Bitmap(img, sz);
         }
 

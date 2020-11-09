@@ -22,7 +22,7 @@ namespace StressdetectionViaFace.utilities
        
        public override string ToString()
         {
-            return String.Concat( key.ToString(), count.ToString() , ";");
+            return String.Concat( key.ToString(),":", count.ToString() , ";");
        
         
         }

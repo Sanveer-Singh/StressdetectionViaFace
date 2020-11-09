@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnChooseImage = new System.Windows.Forms.Button();
             this.picBox = new System.Windows.Forms.PictureBox();
             this.GetDetectedFace = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.btnGetFaceViaLibrary = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnAMLBP = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnLBP = new System.Windows.Forms.Button();
             this.btnADLBP = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,8 +45,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnGradientImage = new System.Windows.Forms.Button();
             this.picBox2 = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             this.SuspendLayout();
@@ -139,16 +142,6 @@
             this.btnAMLBP.UseVisualStyleBackColor = true;
             this.btnAMLBP.Click += new System.EventHandler(this.btnAMLBP_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1287, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(315, 117);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Train";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnLBP
             // 
             this.btnLBP.Location = new System.Drawing.Point(75, 1475);
@@ -215,16 +208,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnGradientImage
-            // 
-            this.btnGradientImage.Location = new System.Drawing.Point(82, 708);
-            this.btnGradientImage.Name = "btnGradientImage";
-            this.btnGradientImage.Size = new System.Drawing.Size(302, 81);
-            this.btnGradientImage.TabIndex = 17;
-            this.btnGradientImage.Text = "ShowGradientImage";
-            this.btnGradientImage.UseVisualStyleBackColor = true;
-            this.btnGradientImage.Click += new System.EventHandler(this.btnGradientImage_Click);
-            // 
             // picBox2
             // 
             this.picBox2.Location = new System.Drawing.Point(2543, 401);
@@ -233,13 +216,46 @@
             this.picBox2.TabIndex = 18;
             this.picBox2.TabStop = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(65, 1699);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(900, 375);
+            this.textBox1.TabIndex = 19;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(2991, 1165);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(18, 934);
+            this.vScrollBar1.TabIndex = 21;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(510, 1596);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(165, 76);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Classify";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(3271, 1684);
+            this.ClientSize = new System.Drawing.Size(3271, 2108);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.vScrollBar1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.picBox2);
-            this.Controls.Add(this.btnGradientImage);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -247,7 +263,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnADLBP);
             this.Controls.Add(this.btnLBP);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAMLBP);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.btnGetFaceViaLibrary);
@@ -278,7 +293,6 @@
         private System.Windows.Forms.Button btnGetFaceViaLibrary;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnAMLBP;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnLBP;
         private System.Windows.Forms.Button btnADLBP;
         private System.Windows.Forms.Label label1;
@@ -286,8 +300,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnGradientImage;
         private System.Windows.Forms.PictureBox picBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

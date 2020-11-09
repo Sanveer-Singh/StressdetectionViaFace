@@ -69,7 +69,7 @@ namespace StressdetectionViaFace.LBPvariants
 
             }
             // return the answer 
-            LBPImage = Filtered;
+            //LBPImage = Filtered;
             return Lattice;
         }
         // lets eliminate duplicates 

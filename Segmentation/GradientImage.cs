@@ -35,7 +35,14 @@ namespace StressdetectionViaFace.Segmentation
 
                     double grad = TotalEdgePixel(x,y) ;
                     int truncedgrad = (int)(Math.Truncate(grad));
-                    // set pixels to the average 
+                    // set pixels to the average
+                    //// set a hard cap
+                    //if(truncedgrad>255)
+                    //{
+                    //    truncedgrad = 255;
+                    //}
+                    Color current = greyscaled.GetPixel(x, y);
+                   
                     greyscaled .SetPixel(x, y, Color.FromArgb(truncedgrad, truncedgrad, truncedgrad));
                 }
             }
@@ -55,7 +62,7 @@ namespace StressdetectionViaFace.Segmentation
        /// <returns></returns>
         public double TotalEdgePixel(int x, int y)
         {
-            double ygradient = yGradient(x, y);
+            double ygradient = 0;//yGradient(x, y);
             double xgradient = XGradient(x, y);
 
             return Math.Sqrt((xgradient * xgradient) + (ygradient * ygradient));
@@ -77,16 +84,18 @@ namespace StressdetectionViaFace.Segmentation
                     values.Add(getValueAt(x, y));
                 }
             }
-
-            values[0] = values[0] * -1;
+            //
+            //
+            //
+            values[0] = values[0] * 1;
             values[1] = values[1] * 0;
-            values[1] = values[1] * -1;
-            values[2] = values[2] * -2;
-            values[3] = values[3] * 0;
-            values[4] = values[4] * 2;
-            values[5] = values[5] * -1;
-            values[6] = values[6] * 0;
-            values[7] = values[7] * 1;
+            values[2] = values[2] * -1;
+            values[3] = values[3] * +2;
+            values[4] = values[4] * 0;
+            values[5] = values[5] * -2;
+            values[6] = values[6] * 1;
+            values[7] = values[7] * 0;
+            values[8] = values[8] * -1;
 
             double total = 0;
             for (int i = 0; i < 8; i++)
@@ -112,7 +121,17 @@ namespace StressdetectionViaFace.Segmentation
                     values.Add(getValueAt(x, y));
                 }
             }
+             //
 
+            //values[0] = values[0] * -1;
+            //values[1] = values[1] * 0;
+            //values[1] = values[1] * -1;
+            //values[2] = values[2] * -2;
+            //values[3] = values[3] * 0;
+            //values[4] = values[4] * 2;
+            //values[5] = values[5] * -1;
+            //values[6] = values[6] * 0;
+            //values[7] = values[7] * 1;
             values[0] = values[0] * 1;
             values[1] = values[1] * 2;
             values[1] = values[1] * 1 ;

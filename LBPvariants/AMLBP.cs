@@ -67,7 +67,7 @@ namespace StressdetectionViaFace.LBPvariants
             List<SanDictionaryItem> items = new List<SanDictionaryItem>();
             
             var query = Lattice.GroupBy(x => x)
-              .Where(g => g.Count() > 1)
+              .Where(g => g.Count() >= 1)
               .Select(y => new  SanDictionaryItem(  y.Key ,  y.Count()) )
               .ToList();
 

@@ -82,7 +82,7 @@ namespace StressdetectionViaFace.Facedetection
             // boundaries for hsv are 25 and 230
             // less than 50 or greater than 150
             double hue = Convert.ToInt32(myHVSImg.GetHueAtxy(x, y));
-            if ((hue < 25) || (hue > 230))
+            if ((hue < 25) || (hue > 150))
             {
                 // shouldnt set a flag to true that might be false already
             }
@@ -90,12 +90,12 @@ namespace StressdetectionViaFace.Facedetection
             {
                 answer = false;
             }
-           // lets try via cbcbr
+            // lets try via cbcbr
             //double cb = myYCbCrImg.CbAtxy(x, y);
             //double cr = myYCbCrImg.CrAtxy(x, y);
-            //if ((cr <= (1.5862 * cb + 20)) && (cr >= (0.3448 * cb + 76.2069))
-            //    && (cr >= (-4.5652 * cb + 234.5652)) //-cb+234.5652
-            //    && (cr <= (-1.15 * cb + 301.75)) && (cr <= (-2.2857 * cb + 43285)))
+            //if (((cr <= (1.5862 * cb + 20)) && (cr >= (0.3448 * cb + 76.2069))
+            //    && (cr >= (-cb + 234.5652)) //
+            //    && (cr <= (-1.15 * cb + 301.75)) && (cr <= (-2.2857 * cb + 43285))) && ((cb >= 77) && (cb <= 127) && (cr >= 133) && (cb <= 173)))
             //{
             //    // shouldnt set a false flag to true by mistake 
             //}
@@ -105,7 +105,7 @@ namespace StressdetectionViaFace.Facedetection
             //}
 
             // rule 2 
-            // cb>= 77 and cb<=127 and cr>= 133 and cb<=173
+            // 
 
 
             return answer;
@@ -165,6 +165,12 @@ namespace StressdetectionViaFace.Facedetection
             return myRgbImg.GetDetectedBmp();
         }
 
+        public RGBImage GetDetectedWithMask()
+        {
+            SkinScan();
+            floodIt();
+            return myRgbImg;
+        }
         // a function that floods any missed bits
         public void floodIt( double tolerance=2)
         {

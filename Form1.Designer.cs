@@ -45,7 +45,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnGradientImage = new System.Windows.Forms.Button();
+            this.picBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnChooseImage
@@ -78,7 +81,7 @@
             // 
             // FillPatches
             // 
-            this.FillPatches.Location = new System.Drawing.Point(82, 494);
+            this.FillPatches.Location = new System.Drawing.Point(82, 443);
             this.FillPatches.Name = "FillPatches";
             this.FillPatches.Size = new System.Drawing.Size(305, 98);
             this.FillPatches.TabIndex = 3;
@@ -98,7 +101,7 @@
             // 
             // btnGreyScalar
             // 
-            this.btnGreyScalar.Location = new System.Drawing.Point(82, 649);
+            this.btnGreyScalar.Location = new System.Drawing.Point(82, 575);
             this.btnGreyScalar.Name = "btnGreyScalar";
             this.btnGreyScalar.Size = new System.Drawing.Size(305, 111);
             this.btnGreyScalar.TabIndex = 5;
@@ -212,11 +215,31 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnGradientImage
+            // 
+            this.btnGradientImage.Location = new System.Drawing.Point(82, 708);
+            this.btnGradientImage.Name = "btnGradientImage";
+            this.btnGradientImage.Size = new System.Drawing.Size(302, 81);
+            this.btnGradientImage.TabIndex = 17;
+            this.btnGradientImage.Text = "ShowGradientImage";
+            this.btnGradientImage.UseVisualStyleBackColor = true;
+            this.btnGradientImage.Click += new System.EventHandler(this.btnGradientImage_Click);
+            // 
+            // picBox2
+            // 
+            this.picBox2.Location = new System.Drawing.Point(2543, 401);
+            this.picBox2.Name = "picBox2";
+            this.picBox2.Size = new System.Drawing.Size(721, 483);
+            this.picBox2.TabIndex = 18;
+            this.picBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2918, 1684);
+            this.ClientSize = new System.Drawing.Size(3271, 1684);
+            this.Controls.Add(this.picBox2);
+            this.Controls.Add(this.btnGradientImage);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -238,6 +261,7 @@
             this.Text = "PreProccessing";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,6 +286,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnGradientImage;
+        private System.Windows.Forms.PictureBox picBox2;
     }
 }
 

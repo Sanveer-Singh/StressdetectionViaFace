@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StressdetectionViaFace.LBPvariants
 {
@@ -18,6 +19,10 @@ namespace StressdetectionViaFace.LBPvariants
             descriptor = new ADLBP(bmp, 1);
         }
 
+      public Bitmap  GetPic()
+        {
+            return descriptor.GetTheLbpImage();
+        }
         public List<SanDictionaryItem > Histogram ()
         {
             return  descriptor.GetHistogram();

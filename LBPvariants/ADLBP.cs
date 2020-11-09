@@ -16,6 +16,12 @@ namespace StressdetectionViaFace.LBPvariants
         int Radius;
         // integer latice 
         List<int> Lattice;
+        // an lbp image to show that the lbp works
+        public Bitmap LBPImage;
+        public Bitmap GetTheLbpImage()
+        { ADLBPLattice();
+            return LBPImage; }
+            
 
         public ADLBP(Bitmap bmp, int Rad = 3)
         {
@@ -32,7 +38,7 @@ namespace StressdetectionViaFace.LBPvariants
         public List<int> ADLBPLattice()
         {
             // make up an answer 
-            Bitmap Filtered = new Bitmap(ThisPic.Width, ThisPic.Height);
+            Bitmap Filtered = new Bitmap(ThisPic.Width+1, ThisPic.Height+1);
             // loop through one window and get the average 
             // goes through them all applies rules then the pixels that pass are marked as detected 
             int x, y, z;
@@ -46,10 +52,13 @@ namespace StressdetectionViaFace.LBPvariants
                     z = AMLBPthis(x, y);
                     // store in the nice 2d array
                     Lattice.Add(z);
+                    Color c = Color.FromArgb(z, z, z);
+                    Filtered.SetPixel(x, y, c);
                 }
 
             }
             // return the answer 
+            LBPImage = Filtered;
             return Lattice;
         }
         // lets eliminate duplicates 
@@ -60,7 +69,7 @@ namespace StressdetectionViaFace.LBPvariants
 
             List<SanDictionaryItem> items = new List<SanDictionaryItem>();
             var query = Lattice.GroupBy(x => x)
-              .Where(g => g.Count() > 1)
+              .Where(g => g.Count() >= 1)
               .Select(y => new SanDictionaryItem(y.Key, y.Count()))
               .ToList();
 

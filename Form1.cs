@@ -11,6 +11,7 @@ using StressdetectionViaFace.Facedetection;
 using StressdetectionViaFace.Preprocessing;
 using StressdetectionViaFace.LBPvariants;
 using StressdetectionViaFace.utilities;
+using StressdetectionViaFace.Segmentation;
 
 namespace StressdetectionViaFace
 {
@@ -26,6 +27,7 @@ namespace StressdetectionViaFace
         public Bitmap FloodedSkin;
         // save the grey scaled version 
         public Bitmap GreyscaledSkin;
+        public Bitmap MyGradientImage;
         // save the face only
         public Bitmap FaceOnly;
         public Form1()
@@ -193,7 +195,7 @@ namespace StressdetectionViaFace
             }
             MessageBox.Show(temp, "histogram");
             Size sz = new Size(original.Width, original.Height);
-            Image img = new Bitmap(original);
+            Image img = new Bitmap(lbp.GetPic());
             picBox.Image = new Bitmap(img, sz);
 
         }
@@ -224,6 +226,15 @@ namespace StressdetectionViaFace
             picBox.Image = new Bitmap(img, sz);
             original = (Bitmap)picBox.Image;
 
+        }
+
+        private void btnGradientImage_Click(object sender, EventArgs e)
+        {
+            GradientImage gi = new GradientImage();
+            MyGradientImage = gi.GetTotalEdgeImage(GreyscaledSkin);
+            Size sz = new Size(GreyscaledSkin.Width, GreyscaledSkin.Height);
+            Image img = new Bitmap(MyGradientImage );
+            picBox2.Image = new Bitmap(img, sz);
         }
     }
 }

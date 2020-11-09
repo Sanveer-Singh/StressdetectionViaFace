@@ -19,7 +19,7 @@ namespace StressdetectionViaFace.LBPvariants
         // an lbp image to show that the lbp works
         public Bitmap LBPImage;
         public Bitmap GetTheLbpImage()
-        { ADLBPLattice();
+        { LBPADLBPLattice();
             return LBPImage; }
             
 
@@ -35,7 +35,7 @@ namespace StressdetectionViaFace.LBPvariants
 
 
         // get AMLBP pic
-        public List<int> ADLBPLattice()
+        public List<int> LBPADLBPLattice()
         {
             // make up an answer 
             Bitmap Filtered = new Bitmap(ThisPic.Width+1, ThisPic.Height+1);
@@ -52,6 +52,7 @@ namespace StressdetectionViaFace.LBPvariants
                     z = AMLBPthis(x, y);
                     // store in the nice 2d array
                     Lattice.Add(z);
+                    z = z / Radius;
                     Color c = Color.FromArgb(z, z, z);
                     Filtered.SetPixel(x, y, c);
                 }
@@ -61,8 +62,37 @@ namespace StressdetectionViaFace.LBPvariants
             LBPImage = Filtered;
             return Lattice;
         }
-        // lets eliminate duplicates 
+        public List<int> ADLBPLattice()
+        {
+            // make up an answer 
+            Bitmap Filtered = new Bitmap(ThisPic.Width + 1, ThisPic.Height + 1);
+            // loop through one window and get the average 
+            // goes through them all applies rules then the pixels that pass are marked as detected 
+            int x, y, z;
 
+            // loop through the rows 
+            for (y = 0; y < ThisPic.Height; y++)
+            {
+                // loop through the cols 
+                for (x = 0; x < ThisPic.Width; x++)
+                {
+                    z = AMLBPthis(x, y);
+                    // store in the nice 2d array
+                    Lattice.Add(z);
+                    z = z / Radius;
+          
+                }
+
+            }
+            // return the answer 
+         
+            return Lattice;
+        }
+        // lets eliminate duplicates 
+        public Bitmap GetPic()
+        {
+            return GetTheLbpImage();
+        }
         public List<SanDictionaryItem> GetHistogram()
         {
             ADLBPLattice  ();

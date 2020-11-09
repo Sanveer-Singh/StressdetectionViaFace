@@ -156,7 +156,7 @@ namespace StressdetectionViaFace
             // save  this 
             original = mf.MeanFilterThis();
             // resize 
-            Size sz = new Size(70, 70);
+            Size sz = new Size(original.Width , original.Height );
             Image img = new Bitmap(original );
             picBox.Image = new Bitmap(img, sz);
             original = (Bitmap )picBox.Image;
@@ -211,7 +211,7 @@ namespace StressdetectionViaFace
             }
             MessageBox.Show(temp, "histogram");
             Size sz = new Size(original.Width, original.Height);
-            Image img = new Bitmap(original);
+            Image img = new Bitmap(original );
             picBox.Image = new Bitmap(img, sz);
         }
 
@@ -221,7 +221,7 @@ namespace StressdetectionViaFace
             // save  this 
             original = cmf.GetFiltered ();
             // resize 
-            Size sz = new Size(70, 70);
+            Size sz = new Size(original.Width, original.Height);
             Image img = new Bitmap(original);
             picBox.Image = new Bitmap(img, sz);
             original = (Bitmap)picBox.Image;

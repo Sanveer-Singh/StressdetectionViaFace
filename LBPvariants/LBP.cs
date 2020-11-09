@@ -21,7 +21,7 @@ namespace StressdetectionViaFace.LBPvariants
 
       public Bitmap  GetPic()
         {
-            return descriptor.GetTheLbpImage();
+            return descriptor.GetPic ();
         }
         public List<SanDictionaryItem > Histogram ()
         {

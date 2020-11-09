@@ -22,6 +22,13 @@ namespace StressdetectionViaFace.LBPvariants
         int Radius;
         // integer latice 
         List<int> Lattice;
+        // an lbp image to show that the lbp works
+        public Bitmap LBPImage;
+        public Bitmap GetTheLbpImage()
+        {
+            AMLBPPic ();
+            return LBPImage;
+        }
 
         public AMLBP(Bitmap bmp, int Rad = 3)
         {
@@ -32,7 +39,10 @@ namespace StressdetectionViaFace.LBPvariants
         }
 
         // get amlbp
-
+        public Bitmap GetPic()
+        {
+            return GetTheLbpImage();
+        }
 
         // get AMLBP pic
         public List<int> AMLBPPic()
@@ -52,10 +62,14 @@ namespace StressdetectionViaFace.LBPvariants
                     z = AMLBPthis(x, y);
                     // store in the nice 2d array
                     Lattice.Add(z);
+                    z = z / Radius ;
+                    //Color c = Color.FromArgb(z, z, z);
+                    //Filtered.SetPixel(x, y, c);
                 }
 
             }
             // return the answer 
+            LBPImage = Filtered;
             return Lattice;
         }
         // lets eliminate duplicates 

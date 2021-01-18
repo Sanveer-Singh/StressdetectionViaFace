@@ -226,7 +226,7 @@ namespace StressdetectionViaFace
 
         private void btnADLBP_Click(object sender, EventArgs e)
         {
-            ADLBP lbp = new ADLBP(original, 3);
+            ADLBP lbp = new ADLBP(original);
             List<SanDictionaryItem> histogram = lbp.GetHistogram();
             string temp = "";
             foreach (SanDictionaryItem i in histogram)

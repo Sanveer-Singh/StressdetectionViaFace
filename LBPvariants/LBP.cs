@@ -108,7 +108,7 @@ namespace StressdetectionViaFace.LBPvariants
         {
             double average = 0;
             int total = 0;
-            double count = 1;
+           
           
                 average = IntensityAverage(X, Y);
                 total = GetPatternAround(X, Y, average);

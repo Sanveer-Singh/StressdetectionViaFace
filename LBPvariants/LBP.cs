@@ -157,52 +157,134 @@ namespace StressdetectionViaFace.LBPvariants
 
             return total / counter;
         }
+        // custom get wrapper
+        private int GetPixelValue(int X,int Y)
+        {
+            int value = 0;
+            if (((X >= 0) && (Y >= 0)) && ((X < ThisPic.Width) && (Y < ThisPic.Height)))
+            {
+                // in bounds
+                value = ThisPic.GetPixel(X, Y).R;
+            }
+         
+
+                return value;
+        }
+
         private int GetPatternAround(int X, int Y, double Average)
         {
             // create binary string
             string Binary = "";
             // loop through one window and set the average 
             // window around that pixel
-            int ave = (int)Math.Truncate(Average);
-            for (int y1 = Y -1; y1 <= Y + 1; y1++)
+            double ave = Average;
+            if (GetPixelValue(X-1, Y-1)< ave)
             {
-                for (int x1 = X - 1; x1 <= X + 1; x1++)
-                {
-                    // explicit bounds checks 
-                    // explicit bounds checks 
-                    if (((x1 >= 0) && (y1 >= 0)) && ((x1 < ThisPic.Width) && (y1 < ThisPic.Height)))
-                    {
-
-                        //, also dont add the centre
-                        if (((x1 != X) && (y1 != Y)))
-                        {
-                            if (ThisPic.GetPixel(x1, y1).R < ave)
-                            {
-                                // it needs to be a zero 
-                                Binary += "0";
-                            }
-                            else
-                            {
-                                // it need a  1 
-                                Binary += "1";
-                            }
-                        }
-                        else
-                        {
-                            //skip
-                        }
-
-                        // this is on the angle
-                      
-           
-                    }
-                    else
-                    {
-                        Binary += "0";
-                    }
-
-                }
+                Binary += "0";
             }
+            else
+            {
+                Binary += "1";
+            }
+
+            if (GetPixelValue(X - 1, Y )< ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+
+            if (GetPixelValue(X - 1, Y + 1) < ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+            if (GetPixelValue(X , Y + 1) < ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+            if (GetPixelValue(X +1, Y +1) < ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+            if (GetPixelValue(X + 1, Y ) < ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+            if (GetPixelValue(X + 1, Y - 1) < ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+            if (GetPixelValue(X , Y - 1) < ave)
+            {
+                Binary += "0";
+            }
+            else
+            {
+                Binary += "1";
+            }
+
+
+            //for (int y1 = Y -1; y1 <= Y + 1; y1++)
+            //{
+            //    for (int x1 = X - 1; x1 <= X + 1; x1++)
+            //    {
+            //        // explicit bounds checks 
+            //        // explicit bounds checks 
+            //        if (((x1 >= 0) && (y1 >= 0)) && ((x1 < ThisPic.Width) && (y1 < ThisPic.Height)))
+            //        {
+
+            //            //, also dont add the centre
+            //            if (((x1 != X) && (y1 != Y)))
+            //            {
+            //                if (ThisPic.GetPixel(x1, y1).R < ave)
+            //                {
+            //                    // it needs to be a zero 
+            //                    Binary += "0";
+            //                }
+            //                else
+            //                {
+            //                    // it need a  1 
+            //                    Binary += "1";
+            //                }
+            //            }
+            //            else
+            //            {
+            //                //skip
+            //            }
+
+            //            // this is on the angle
+
+
+            //        }
+            //        else
+            //        {
+            //            Binary += "0";
+            //        }
+
+            //    }
+            //}
             return GetDecimalFromBinary(Binary);
 
         }

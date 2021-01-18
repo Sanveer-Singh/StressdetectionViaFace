@@ -84,10 +84,6 @@ namespace StressdetectionViaFace.LBPvariants
                 {
                     z = AMLBPthis(x, y);
                     // store in the nice 2d array
-                    while (z > 255)
-                    {
-                        z = z / 256;
-                    }
                     Lattice.Add(z);
                     z = z / Radius;
                     Color c = Color.FromArgb(z, z, z);

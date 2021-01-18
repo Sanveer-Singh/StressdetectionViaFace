@@ -210,7 +210,7 @@ namespace StressdetectionViaFace
         private void btnLBP_Click(object sender, EventArgs e)
         {
             LBP lbp = new LBP(original);
-            List<SanDictionaryItem> histogram = lbp.Histogram();
+            List<SanDictionaryItem> histogram = lbp.GetHistogram();
             string temp = "";
             foreach (SanDictionaryItem i in histogram)
             {
@@ -264,15 +264,15 @@ namespace StressdetectionViaFace
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if(histogram1 is null)
+            if(histogram1a is null)
             {
 
             }
-            if (histogram2 is null)
+            if (histogram2a is null)
             {
 
             }
-            if (histogram3 is null)
+            if (histogram3a is null)
             {
 
             }

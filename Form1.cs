@@ -261,5 +261,21 @@ namespace StressdetectionViaFace
             picBox2.Image = new Bitmap(img, sz);
 
         }
+
+        private void NI_LBP_Click(object sender, EventArgs e)
+        {
+            NI_LBP lbp = new NI_LBP(original);
+            List<SanDictionaryItem> histogram = lbp.GetHistogram();
+            string temp = "";
+            foreach (SanDictionaryItem i in histogram)
+            {
+                temp += i.ToString();
+            }
+            textBox1.Text = temp;
+            MessageBox.Show(temp, "histogram");
+            Size sz = new Size(original.Width, original.Height);
+            Image img = new Bitmap(lbp.GetPic());
+            picBox.Image = new Bitmap(img, sz);
+        }
     }
 }

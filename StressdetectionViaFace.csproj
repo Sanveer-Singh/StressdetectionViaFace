@@ -97,6 +97,7 @@
     <Compile Include="LBPvariants\ADLBP.cs" />
     <Compile Include="LBPvariants\AMLBP.cs" />
     <Compile Include="LBPvariants\LBP.cs" />
+    <Compile Include="LBPvariants\NI-LBP.cs" />
     <Compile Include="Preprocessing\CircularMeanFilter.cs" />
     <Compile Include="Preprocessing\ColorMeanFilter.cs" />
     <Compile Include="Preprocessing\GreyScalar.cs" />

@@ -48,6 +48,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.GradientTest = new System.Windows.Forms.Button();
+            this.NI_LBP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             this.SuspendLayout();
@@ -245,11 +246,22 @@
             this.GradientTest.UseVisualStyleBackColor = true;
             this.GradientTest.Click += new System.EventHandler(this.GradientTest_Click);
             // 
+            // NI_LBP
+            // 
+            this.NI_LBP.Location = new System.Drawing.Point(164, 665);
+            this.NI_LBP.Name = "NI_LBP";
+            this.NI_LBP.Size = new System.Drawing.Size(119, 36);
+            this.NI_LBP.TabIndex = 21;
+            this.NI_LBP.Text = "NI_LBP";
+            this.NI_LBP.UseVisualStyleBackColor = true;
+            this.NI_LBP.Click += new System.EventHandler(this.NI_LBP_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 884);
+            this.Controls.Add(this.NI_LBP);
             this.Controls.Add(this.GradientTest);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.picBox2);
@@ -300,6 +312,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button GradientTest;
+        private System.Windows.Forms.Button NI_LBP;
     }
 }
 

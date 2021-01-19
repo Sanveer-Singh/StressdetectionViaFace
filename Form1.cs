@@ -138,6 +138,7 @@ namespace StressdetectionViaFace
         private void btnGreyScalar_Click(object sender, EventArgs e)
         {
             Bitmap greyScaled = detector.GetGreyscaled();
+            original = greyScaled;
             // save 
             GreyscaledSkin = greyScaled;
             // set size

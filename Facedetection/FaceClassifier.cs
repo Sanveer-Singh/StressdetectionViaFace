@@ -198,7 +198,7 @@ namespace StressdetectionViaFace.Facedetection
                             // not detected as skin 
                             skinNeighbors = getSkinneighbors(x, y);
                             // if its surrounded by skin
-                            if ((skinNeighbors > (5.9 - tolerance)))
+                            if ((skinNeighbors > (7 - tolerance)))
                             {
                                 // make it a skin pixel
                                 myRgbImg.SetDetected(x, y, true);
@@ -295,21 +295,21 @@ namespace StressdetectionViaFace.Facedetection
             newHeight = mostdown - mostup;
             Bitmap newimg = new Bitmap(newWidth, newHeight);
             Bitmap oldimg = myRgbImg.ToBmp();
-            // copy 
-            int x, y;
+            //// copy 
+            //int x, y;
         
-            // loop through the rows 
-            for (y = mostup ; y < mostdown  ; y++)
-            {
-                // loop through the cols 
-                for (x = mostleft ; x < mostright  ; x++)
-                {
-                    Color nc = new Color();
-                    nc = oldimg.GetPixel(x, y);
-                    newimg.SetPixel(x - mostleft, y - mostup, nc);
-                }
+            //// loop through the rows 
+            //for (y = mostup ; y < mostdown  ; y++)
+            //{
+            //    // loop through the cols 
+            //    for (x = mostleft ; x < mostright  ; x++)
+            //    {
+            //        Color nc = new Color();
+            //        nc = oldimg.GetPixel(x, y);
+            //        newimg.SetPixel(x - mostleft, y - mostup, nc);
+            //    }
 
-            }
+            //}
 
             return newimg;
         }

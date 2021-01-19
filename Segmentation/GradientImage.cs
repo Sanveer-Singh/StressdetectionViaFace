@@ -37,10 +37,14 @@ namespace StressdetectionViaFace.Segmentation
                     int truncedgrad = (int)(Math.Truncate(grad));
                     // set pixels to the average
                     //// set a hard cap
-                    //if(truncedgrad>255)
-                    //{
-                    //    truncedgrad = 255;
-                    //}
+                    if (truncedgrad > 255)
+                    {
+                        truncedgrad = 255;
+                    }
+                    if (truncedgrad < 0)
+                    {
+                        truncedgrad = 0;
+                    }
                     Color current = greyscaled.GetPixel(x, y);
                    
                     greyscaled .SetPixel(x, y, Color.FromArgb(truncedgrad, truncedgrad, truncedgrad));
@@ -64,8 +68,10 @@ namespace StressdetectionViaFace.Segmentation
         {
             double ygradient = 0;//yGradient(x, y);
             double xgradient = XGradient(x, y);
-
-            return Math.Sqrt((xgradient * xgradient) + (ygradient * ygradient));
+            double x2 = (xgradient * xgradient);
+            double y2 = (ygradient * ygradient);
+            double tot = x2 + y2;
+            return Math.Sqrt( tot);
         }
 
         /// <summary>
@@ -76,32 +82,36 @@ namespace StressdetectionViaFace.Segmentation
         /// <returns></returns>
         public double XGradient(int x, int y)
         {
-            List<double> values = new List<double>();
-            for (int y1 = y - 1; y1 <= y + 1; y1++)
-            {
-                for (int x1 = x - 1; x1 <= x + 1; x1++)
-                {
-                    values.Add(getValueAt(x, y));
-                }
-            }
-            //
-            //
-            //
-            values[0] = values[0] * 1;
-            values[1] = values[1] * 0;
-            values[2] = values[2] * -1;
-            values[3] = values[3] * +2;
-            values[4] = values[4] * 0;
-            values[5] = values[5] * -2;
-            values[6] = values[6] * 1;
-            values[7] = values[7] * 0;
-            values[8] = values[8] * -1;
+            //List<double> values = new List<double>();
+            //for (int y1 = y - 1; y1 <= y + 1; y1++)
+            //{
+            //    for (int x1 = x - 1; x1 <= x + 1; x1++)
+            //    {
+            //        values.Add(getValueAt(x, y));
+            //    }
+            //}
+            ////
+            ////
+            ////
+            //values[0] = values[0] * 1;
+            //values[1] = values[1] * 0;
+            //values[2] = values[2] * -1;
+            //values[3] = values[3] * +2;
+            //values[4] = values[4] * 0;
+            //values[5] = values[5] * -2;
+            //values[6] = values[6] * 1;
+            //values[7] = values[7] * 0;
+            //values[8] = values[8] * -1;
 
+            //double total = 0;
             double total = 0;
-            for (int i = 0; i < 8; i++)
-            {
-                total += values[i];
-            }
+            //for(int i =0; i<8;i++)
+            //{
+            //    total += values[i];
+            //}
+            double Left = getValueAt(x-1, y);
+            double Right = getValueAt(x+1, y);
+            total = Left - Right;
             return total;
         }
 
@@ -113,40 +123,43 @@ namespace StressdetectionViaFace.Segmentation
         /// <returns></returns>
         public double yGradient(int x,int y)
         {
-            List<double> values = new List<double>();
-             for(int y1 = y-1; y1<=y+1;y1++)
-            {
-                 for(int x1 = x-1;x1<=x+1;x1++)
-                {
-                    values.Add(getValueAt(x, y));
-                }
-            }
-             //
+            //List<double> values = new List<double>();
+            // for(int y1 = y-1; y1<=y+1;y1++)
+            //{
+            //     for(int x1 = x-1;x1<=x+1;x1++)
+            //    {
+            //        values.Add(getValueAt(x, y));
+            //    }
+            //}
+            // //
 
-            //values[0] = values[0] * -1;
-            //values[1] = values[1] * 0;
-            //values[1] = values[1] * -1;
-            //values[2] = values[2] * -2;
+            ////values[0] = values[0] * -1;
+            ////values[1] = values[1] * 0;
+            ////values[1] = values[1] * -1;
+            ////values[2] = values[2] * -2;
+            ////values[3] = values[3] * 0;
+            ////values[4] = values[4] * 2;
+            ////values[5] = values[5] * -1;
+            ////values[6] = values[6] * 0;
+            ////values[7] = values[7] * 1;
+            //values[0] = values[0] * 1;
+            //values[1] = values[1] * 2;
+            //values[1] = values[1] * 1 ;
+            //values[2] = values[2] * 0;
             //values[3] = values[3] * 0;
-            //values[4] = values[4] * 2;
+            //values[4] = values[4] * 0;
             //values[5] = values[5] * -1;
-            //values[6] = values[6] * 0;
-            //values[7] = values[7] * 1;
-            values[0] = values[0] * 1;
-            values[1] = values[1] * 2;
-            values[1] = values[1] * 1 ;
-            values[2] = values[2] * 0;
-            values[3] = values[3] * 0;
-            values[4] = values[4] * 0;
-            values[5] = values[5] * -1;
-            values[6] = values[6] * -2;
-            values[7] = values[7] * -1;
+            //values[6] = values[6] * -2;
+            //values[7] = values[7] * -1;
 
             double total=0;
-            for(int i =0; i<8;i++)
-            {
-                total += values[i];
-            }
+            //for(int i =0; i<8;i++)
+            //{
+            //    total += values[i];
+            //}
+            double  top = getValueAt(x, y - 1);
+            double bottom = getValueAt(x, y + 1);
+            total = top - bottom;
             return total;
         }
          

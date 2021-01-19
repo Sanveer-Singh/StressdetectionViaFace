@@ -49,7 +49,7 @@ namespace StressdetectionViaFace
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            button1.Visible = false;
+           
         }
 
         private void btnChooseImage_Click(object sender, EventArgs e)
@@ -185,22 +185,7 @@ namespace StressdetectionViaFace
 
         }
 
-        private void btnAMLBP_Click(object sender, EventArgs e)
-        {
-          
-            AMLBP lbp = new AMLBP(original, 3);
-            List<SanDictionaryItem > histogram = lbp.GetHistogram ();
-            string temp = "";
-            foreach (SanDictionaryItem  i in histogram )
-            {
-                temp += i.ToString();
-            }
-            MessageBox.Show(temp, "histogram");
-            textBox1.Text = temp;
-            Size sz = new Size(original.Width, original.Height);
-            Image img = new Bitmap(lbp.GetPic());
-            picBox.Image = new Bitmap(img, sz);
-        }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -264,18 +249,17 @@ namespace StressdetectionViaFace
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if(histogram1a is null)
-            {
+            btnGradientImage_Click(sender,e);
+        }
 
-            }
-            if (histogram2a is null)
-            {
+        private void GradientTest_Click(object sender, EventArgs e)
+        {
+            GradientImage gi = new GradientImage();
+            MyGradientImage = gi.GetTotalEdgeImage(original);
+            Size sz = new Size(original.Width, original.Height);
+            Image img = new Bitmap(MyGradientImage);
+            picBox2.Image = new Bitmap(img, sz);
 
-            }
-            if (histogram3a is null)
-            {
-
-            }
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HYPKNN" Class="HYPKNNDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HYPKNN;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="StressdetectionViaFace.Properties.Settings" SettingsPropertyName="HYPKNNConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Pipelines" Member="Pipelines">
+    <Type Name="Pipeline">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="lOCATION" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LABEL" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LBPpattern" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LBPpredicted" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="NILBPpattern" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="NILBPpredicted" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CONCATpattern" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CONCATpredicted" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

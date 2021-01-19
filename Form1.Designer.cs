@@ -38,10 +38,7 @@
             this.btnLBP = new System.Windows.Forms.Button();
             this.btnADLBP = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.picBox2 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.GradientTest = new System.Windows.Forms.Button();
@@ -51,41 +48,40 @@
             this.btnPipeline3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnChooseImage = new System.Windows.Forms.Button();
+            this.btnTrain = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // picBox
             // 
-            this.picBox.Location = new System.Drawing.Point(170, 107);
+            this.picBox.Location = new System.Drawing.Point(202, 135);
             this.picBox.Margin = new System.Windows.Forms.Padding(1);
             this.picBox.Name = "picBox";
-            this.picBox.Size = new System.Drawing.Size(343, 294);
+            this.picBox.Size = new System.Drawing.Size(832, 439);
             this.picBox.TabIndex = 1;
             this.picBox.TabStop = false;
             // 
             // GetDetectedFace
             // 
-            this.GetDetectedFace.Location = new System.Drawing.Point(31, 138);
+            this.GetDetectedFace.Location = new System.Drawing.Point(1110, 87);
             this.GetDetectedFace.Margin = new System.Windows.Forms.Padding(1);
             this.GetDetectedFace.Name = "GetDetectedFace";
             this.GetDetectedFace.Size = new System.Drawing.Size(114, 40);
             this.GetDetectedFace.TabIndex = 2;
             this.GetDetectedFace.Text = "Show skin detected";
             this.GetDetectedFace.UseVisualStyleBackColor = true;
-            this.GetDetectedFace.Visible = false;
             this.GetDetectedFace.Click += new System.EventHandler(this.GetDetectedFace_Click);
             // 
             // FillPatches
             // 
-            this.FillPatches.Location = new System.Drawing.Point(31, 186);
+            this.FillPatches.Location = new System.Drawing.Point(1110, 135);
             this.FillPatches.Margin = new System.Windows.Forms.Padding(1);
             this.FillPatches.Name = "FillPatches";
             this.FillPatches.Size = new System.Drawing.Size(114, 41);
             this.FillPatches.TabIndex = 3;
             this.FillPatches.Text = "Fill patches";
             this.FillPatches.UseVisualStyleBackColor = true;
-            this.FillPatches.Visible = false;
             this.FillPatches.Click += new System.EventHandler(this.FillPatches_Click);
             // 
             // btnGreyScalar
@@ -102,7 +98,7 @@
             // 
             // btnGetFaceViaLibrary
             // 
-            this.btnGetFaceViaLibrary.Location = new System.Drawing.Point(921, 70);
+            this.btnGetFaceViaLibrary.Location = new System.Drawing.Point(1102, 563);
             this.btnGetFaceViaLibrary.Margin = new System.Windows.Forms.Padding(1);
             this.btnGetFaceViaLibrary.Name = "btnGetFaceViaLibrary";
             this.btnGetFaceViaLibrary.Size = new System.Drawing.Size(114, 49);
@@ -113,7 +109,7 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(31, 439);
+            this.btnFilter.Location = new System.Drawing.Point(1110, 209);
             this.btnFilter.Margin = new System.Windows.Forms.Padding(1);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(114, 44);
@@ -124,7 +120,7 @@
             // 
             // btnLBP
             // 
-            this.btnLBP.Location = new System.Drawing.Point(28, 619);
+            this.btnLBP.Location = new System.Drawing.Point(1107, 389);
             this.btnLBP.Margin = new System.Windows.Forms.Padding(1);
             this.btnLBP.Name = "btnLBP";
             this.btnLBP.Size = new System.Drawing.Size(114, 32);
@@ -135,7 +131,7 @@
             // 
             // btnADLBP
             // 
-            this.btnADLBP.Location = new System.Drawing.Point(28, 665);
+            this.btnADLBP.Location = new System.Drawing.Point(1107, 435);
             this.btnADLBP.Margin = new System.Windows.Forms.Padding(1);
             this.btnADLBP.Name = "btnADLBP";
             this.btnADLBP.Size = new System.Drawing.Size(114, 36);
@@ -155,16 +151,6 @@
             this.label2.Text = "Localization By Hand:";
             this.label2.Visible = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(913, 33);
-            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(129, 15);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Localization Via library";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -174,34 +160,15 @@
             this.label4.Size = new System.Drawing.Size(138, 15);
             this.label4.TabIndex = 15;
             this.label4.Text = "Pre Processing Options:";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(31, 497);
-            this.button2.Margin = new System.Windows.Forms.Padding(1);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 36);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Soften Via Circular Filter";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // picBox2
-            // 
-            this.picBox2.Location = new System.Drawing.Point(954, 168);
-            this.picBox2.Margin = new System.Windows.Forms.Padding(1);
-            this.picBox2.Name = "picBox2";
-            this.picBox2.Size = new System.Drawing.Size(270, 203);
-            this.picBox2.TabIndex = 18;
-            this.picBox2.TabStop = false;
+            this.label4.Visible = false;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 712);
+            this.textBox1.Location = new System.Drawing.Point(10, 115);
             this.textBox1.Margin = new System.Windows.Forms.Padding(1);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(340, 160);
+            this.textBox1.Size = new System.Drawing.Size(137, 468);
             this.textBox1.TabIndex = 19;
             // 
             // contextMenuStrip1
@@ -212,7 +179,7 @@
             // 
             // GradientTest
             // 
-            this.GradientTest.Location = new System.Drawing.Point(24, 554);
+            this.GradientTest.Location = new System.Drawing.Point(1103, 324);
             this.GradientTest.Name = "GradientTest";
             this.GradientTest.Size = new System.Drawing.Size(118, 39);
             this.GradientTest.TabIndex = 20;
@@ -222,7 +189,7 @@
             // 
             // NI_LBP
             // 
-            this.NI_LBP.Location = new System.Drawing.Point(164, 665);
+            this.NI_LBP.Location = new System.Drawing.Point(1102, 494);
             this.NI_LBP.Name = "NI_LBP";
             this.NI_LBP.Size = new System.Drawing.Size(119, 36);
             this.NI_LBP.TabIndex = 21;
@@ -273,31 +240,50 @@
             // 
             // btnChooseImage
             // 
-            this.btnChooseImage.Location = new System.Drawing.Point(31, 70);
+            this.btnChooseImage.Location = new System.Drawing.Point(1110, 19);
             this.btnChooseImage.Margin = new System.Windows.Forms.Padding(1);
             this.btnChooseImage.Name = "btnChooseImage";
             this.btnChooseImage.Size = new System.Drawing.Size(114, 39);
             this.btnChooseImage.TabIndex = 0;
             this.btnChooseImage.Text = "OpenImage";
             this.btnChooseImage.UseVisualStyleBackColor = true;
-            this.btnChooseImage.Visible = false;
             this.btnChooseImage.Click += new System.EventHandler(this.btnChooseImage_Click);
+            // 
+            // btnTrain
+            // 
+            this.btnTrain.Location = new System.Drawing.Point(901, 12);
+            this.btnTrain.Name = "btnTrain";
+            this.btnTrain.Size = new System.Drawing.Size(192, 46);
+            this.btnTrain.TabIndex = 25;
+            this.btnTrain.Text = "Add Point";
+            this.btnTrain.UseVisualStyleBackColor = true;
+            this.btnTrain.Click += new System.EventHandler(this.btnTrain_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1110, 267);
+            this.button2.Margin = new System.Windows.Forms.Padding(1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(113, 36);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Soften Via Circular Filter";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 884);
+            this.ClientSize = new System.Drawing.Size(1961, 884);
+            this.Controls.Add(this.btnTrain);
             this.Controls.Add(this.btnPipeline3);
             this.Controls.Add(this.btnPipeline2);
             this.Controls.Add(this.btnPipeline);
             this.Controls.Add(this.NI_LBP);
             this.Controls.Add(this.GradientTest);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.picBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnADLBP);
@@ -314,7 +300,6 @@
             this.Text = "PreProccessing";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,10 +315,7 @@
         private System.Windows.Forms.Button btnLBP;
         private System.Windows.Forms.Button btnADLBP;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PictureBox picBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button GradientTest;
@@ -343,6 +325,8 @@
         private System.Windows.Forms.Button btnPipeline3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnChooseImage;
+        private System.Windows.Forms.Button btnTrain;
+        private System.Windows.Forms.Button button2;
     }
 }
 

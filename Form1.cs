@@ -45,6 +45,9 @@ namespace StressdetectionViaFace
         private void Form1_Load(object sender, EventArgs e)
         {
             //HYPKNNDataContext db = new HYPKNNDataContext();
+            //var test = (from u in db.Pipelines
+            //           where u.CONCATpattern == "test1"
+            //           select u).FirstOrDefault();
             //Pipeline p = new Pipeline();
             //p.CONCATpattern = "test1";
             //p.CONCATpredicted = "test1";
@@ -54,12 +57,10 @@ namespace StressdetectionViaFace
             //db.Pipelines.InsertOnSubmit(p);
             //db.SubmitChanges();
             //Pipeline x = new Pipeline();
-            //var test = (from u in db.Pipelines
-            //           where u.CONCATpattern == "test1"
-            //           select u).FirstOrDefault();
+
 
             //x = (Pipeline)test;
-       
+
         }
 
         private void btnChooseImage_Click(object sender, EventArgs e)
@@ -266,7 +267,7 @@ namespace StressdetectionViaFace
             MyGradientImage = gi.GetTotalEdgeImage(GreyscaledSkin);
             Size sz = new Size(GreyscaledSkin.Width, GreyscaledSkin.Height);
             Image img = new Bitmap(MyGradientImage );
-            picBox2.Image = new Bitmap(img, sz);
+           // picBox2.Image = new Bitmap(img, sz);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -280,7 +281,7 @@ namespace StressdetectionViaFace
             MyGradientImage = gi.GetTotalEdgeImage(original);
             Size sz = new Size(original.Width, original.Height);
             Image img = new Bitmap(MyGradientImage);
-            picBox2.Image = new Bitmap(img, sz);
+            picBox.Image = new Bitmap(img, sz);
 
         }
 
@@ -339,7 +340,7 @@ namespace StressdetectionViaFace
         {
             btnChooseImage_Click(sender, e);
             // step 1
-            string input = Interaction.InputBox("Please enter the true label");
+ 
             // step 2
             btnGetFaceViaLibrary_Click(sender, e);
             
@@ -348,13 +349,14 @@ namespace StressdetectionViaFace
             btnFilter_Click(sender, e);
             // step 4
             string hist = nilbp();
+            msgBox(ClassifyP1(hist));
         }
 
         private void btnPipeline3_Click(object sender, EventArgs e)
         {
             btnChooseImage_Click(sender, e);
             // step 1
-            string input = Interaction.InputBox("Please enter the true label");
+          
             // step 2
             btnGetFaceViaLibrary_Click(sender, e);
 
@@ -369,9 +371,102 @@ namespace StressdetectionViaFace
             btnFilter_Click(sender, e);
             string hist2 = LBP();
             string hist = hist1 + hist2;
+            msgBox(ClassifyP1(hist));
 
         }
 
+        private void Train(Object sender, EventArgs e)
+        {// data to be stored 
+         // file name 
+         // file location
+         // label 
+         //predicted 1, 2 , and 3
+         // lbp pattern 1, 2, and 3
 
+            HYPKNNDataContext db = new HYPKNNDataContext();
+            Pipeline p = new Pipeline();
+            p.lOCATION = FileLocation1;
+            p.NAME = FileName1;
+           
+            btnChooseImage_Click(sender, e);
+            // step 1
+            string input = Interaction.InputBox("Please enter the true label");
+            p.LABEL= input;
+            // step 2
+           
+            btnGetFaceViaLibrary_Click(sender, e);
+
+            // step 3
+
+            btnFilter_Click(sender, e);
+            // step 4
+            string hist1 = nilbp();
+            p.NILBPpattern = hist1;
+
+
+            // rewrite original
+            Bitmap m1 = new Bitmap(FileLocation1);
+            Image img = new Bitmap(m1);
+            original = m1;
+            btnGetFaceViaLibrary_Click(sender, e);
+            btnFilter_Click(sender, e);
+            string hist2 = LBP();
+            string hist = hist1 + hist2;
+            p.CONCATpattern = hist;
+            // rewrite original
+            Bitmap m2 = new Bitmap(FileLocation1);
+            Image img2 = new Bitmap(m1);
+            original = m2;
+            //GetDetectedFace_Click(sender, e);
+            //// step 2
+            //FillPatches_Click(sender, e);
+            //// step 3
+            //btnGreyScalar_Click(sender, e);
+            //btnFilter_Click(sender, e);
+            //// step 4
+            //string hist3 = LBP();
+            //p.LBPpattern = hist3;
+            db.Pipelines.InsertOnSubmit(p);
+            db.SubmitChanges();
+            msgBox();
+           
+        }
+
+        private void btnTrain_Click(object sender, EventArgs e)
+        {
+            Train(sender, e);
+        }
+
+        private string ClassifyP1(string hist)
+        {
+            HYPKNNDataContext db = new HYPKNNDataContext();
+            var test = (from u in db.Pipelines
+                        where (u.CONCATpattern == hist || u.NILBPpattern == hist)
+                        select u).FirstOrDefault();
+            Pipeline t = (Pipeline)test;
+            return t.LABEL;
+        }
+        //public static double compareHistograms(ArrayList<Integer> h1, ArrayList<Integer> h2)
+        //{
+        //    double min = 0;
+
+        //    for (int i = 0; i < h1.size(); i++)
+        //    {
+        //        min += Math.min(h1.get(i), h2.get(i)) * 1.0;
+
+        //    }
+        //    return Math.abs(min / h2.size() * 1.0);
+        //}
+
+        //public static double compareHistograms2(ArrayList<Integer> h1, ArrayList<Integer> h2)
+        //{
+        //    double sum = 0;
+
+        //    for (int i = 0; i < h1.size(); i++)
+        //    {
+        //        sum += Math.pow(h1.get(i) - h2.get(i), 2) * 1.0;
+        //    }
+        //    return Math.sqrt(sum);
+        //}
     }
 }

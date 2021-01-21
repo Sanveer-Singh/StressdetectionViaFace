@@ -78,7 +78,7 @@ namespace StressdetectionViaFace
                 // display image in picture box  
                 // image file path  
                 FileLocation1 = open.FileName;
-                FileName1 = Interaction.InputBox("Please enter file name ");
+                FileName1 = FileLocation1;
                  Bitmap m1 = new Bitmap(FileLocation1);
                 Image img = new Bitmap(m1);
                 original = m1;
@@ -349,7 +349,7 @@ namespace StressdetectionViaFace
             btnFilter_Click(sender, e);
             // step 4
             string hist = nilbp();
-            msgBox(ClassifyP1(hist));
+            msgBox(ClassifyP3(hist));
         }
 
         private void btnPipeline3_Click(object sender, EventArgs e)
@@ -371,7 +371,7 @@ namespace StressdetectionViaFace
             btnFilter_Click(sender, e);
             string hist2 = LBP();
             string hist = hist1 + hist2;
-            msgBox(ClassifyP1(hist));
+            msgBox("Predicted is"+ClassifyP3(hist));
 
         }
 
@@ -413,10 +413,10 @@ namespace StressdetectionViaFace
             string hist2 = LBP();
             string hist = hist1 + hist2;
             p.CONCATpattern = hist;
-            // rewrite original
-            Bitmap m2 = new Bitmap(FileLocation1);
-            Image img2 = new Bitmap(m1);
-            original = m2;
+            //// rewrite original
+            //Bitmap m2 = new Bitmap(FileLocation1);
+            //Image img2 = new Bitmap(m1);
+            //original = m2;
             //GetDetectedFace_Click(sender, e);
             //// step 2
             //FillPatches_Click(sender, e);
@@ -437,14 +437,129 @@ namespace StressdetectionViaFace
             Train(sender, e);
         }
 
-        private string ClassifyP1(string hist)
+        private string ClassifyP3(string hist)
         {
             HYPKNNDataContext db = new HYPKNNDataContext();
             var test = (from u in db.Pipelines
                         where (u.CONCATpattern == hist || u.NILBPpattern == hist)
                         select u).FirstOrDefault();
             Pipeline t = (Pipeline)test;
-            return t.LABEL;
+            
+           List<string> votes =  FindnearestNeighbourp3(hist, 5);
+            string[] options = { "NEUTRAL", "ANGER", "CONTEPT", "DISGUST", "FEAR", "HAPPY", "SADNESS", "SURPRISE" };
+           
+            int x = 0;
+            List<OrderedPair> Ops = new List<OrderedPair>();
+           
+            for (x=0; x<8;x++)
+            {
+                OrderedPair op = new OrderedPair();
+                op.label = options[x];
+                int count = 0;
+                foreach (string vote in votes)
+                {
+                    if (vote.Equals( op.label)){ count++; };
+                }
+                op.dist = count;
+                Ops.Add(op);
+          
+            }
+           
+            string answer = "";
+            foreach(OrderedPair orderedpair in Ops)
+            {
+                answer += "Votes for "+ orderedpair.label+" is " +orderedpair.dist+Environment.NewLine;
+            }
+
+            //var votecount =
+            //     (from vote in votes
+            //    group vote by vote into emotion
+            //    select new  
+            //    {
+            //        Emotion = emotion.Key,
+            //        Count = emotion.Count(),
+            //    }).ToList().ToString();
+
+            //return (string)votecount;
+            return answer;
+        }
+        private List<string> FindnearestNeighbourp3 (string hist, int k)
+        {
+            HYPKNNDataContext db = new HYPKNNDataContext();
+            // split the string
+
+            int[] vector = splitter(hist);
+            List<string> votes = new List<string>();
+            try
+            {
+                //var test = ((from u in db.Pipelines
+                //             orderby distance(splitter(u.CONCATpattern), vector) descending
+                //             select u).Take(k)).ToList();
+                var test = (from u in db.Pipelines
+                             select u).ToList();
+                List<Pipeline> pipes = (List<Pipeline>)test;
+                // compare vectors
+                List<OrderedPair> pairs = new List<OrderedPair>();
+                foreach (Pipeline p in pipes)
+                {
+                    int[] vect2 = splitter(p.CONCATpattern);
+                    double dist = distance(vector, vect2);
+                    OrderedPair op = new OrderedPair();
+                    op.dist = dist;
+                    op.label =  p.LABEL;
+                    pairs.Add(op);
+
+                }
+                var test2 = ((from u in pairs
+                             orderby u.dist ascending
+                             select u).Take(k)).ToList();
+                List<OrderedPair> ops = (List<OrderedPair>)test2;
+
+                // order by the top
+                foreach (OrderedPair  p in ops)
+                {
+                    string label = p.label;
+                     label = label.ToUpper();
+                    votes.Add(label);
+                }
+            }catch(Exception e)
+            {
+            // Console.print(e.StackTrace);
+            }
+           
+            return votes;
+        }
+     
+
+        private int[] splitter(string tosplit)
+        {
+            // split the string
+          
+            string[] words = tosplit.Split(';');
+            int[] vector = new int[255];
+            int x = 0;
+            foreach (string w in words)
+            {
+                if (w.Length>0)
+                {
+                    vector[x] = int.Parse(w);
+                }
+                
+            }
+            return vector;
+        }
+
+        private double distance(int[] vector1 , int[] vector2 )
+        {
+            int x = 0;
+            double sum = 0;
+            int size = vector1.Length;
+            for (x= 0; x< size; x++)
+            {
+                sum += (vector1[x] - vector2[x]) * (vector1[x] - vector2[x]);
+            }
+            return Math.Sqrt(sum);
+
         }
         //public static double compareHistograms(ArrayList<Integer> h1, ArrayList<Integer> h2)
         //{

@@ -110,6 +110,7 @@
     <Compile Include="Segmentation\ImageGraph.cs" />
     <Compile Include="Segmentation\ImageNode.cs" />
     <Compile Include="Segmentation\SegmentationImage.cs" />
+    <Compile Include="utilities\OrderedPair.cs" />
     <Compile Include="utilities\point.cs" />
     <Compile Include="utilities\SanDictionaryItem.cs" />
     <EmbeddedResource Include="Form1.resx">
